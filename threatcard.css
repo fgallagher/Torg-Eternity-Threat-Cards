@@ -1,0 +1,232 @@
+body {
+  font-family: 'Archivo Black';
+  
+  background-color: #ffdca055;
+
+  -webkit-text-stroke: 1.75px #333333;
+  font-size: 150%;
+}
+
+div.threatPage {
+  display: grid;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+/*   grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+}
+
+div.threat {
+  display: grid;
+  width: 480px;
+  height: 750px;
+  margin: 0px 20px 0px 20px;
+  
+  grid-row-gap: 20px;
+  padding: 1px;
+  border: solid 5px;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 100fr;
+
+/*   background-color: #a8a8a8;
+  background: url('https://images.squarespace-cdn.com/content/v1/54dd2136e4b0886d9bf86b76/1526671197004-V9SILI8AIXZQXE1TRZSP/ke17ZwdGBToddI8pDm48kOFDoe2VELPYIKbu7g6KtYsUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdIHngr59X9-kA3XInwe8sRoyo6lJLLbWmm0shLZGSfVtyoKoLPT5G4LIOhn8QCtSZ8/Living-Land-Baruk-Kaah.jpg') no-repeat center top;  
+  background: url('https://memeworld.funnyjunk.com/pictures/Hear+that+rumbling+giants_2b5d69_7082071.jpg') no-repeat center top;
+  background: url('https://66.media.tumblr.com/tumblr_m6u0itENVo1qkkw9mo1_640.jpg') no-repeat center top;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ */
+}
+
+div.threatplayer {
+  grid-template-areas:
+    '. . title title title title title'
+    'interaction interaction interaction . . . .'
+    'size size . . combat combat combat';
+}
+
+div.threatName {
+  grid-area: title;
+
+  border: solid;
+  border-color: black;
+  background-color: #ddca7e;
+
+  align-self: start;
+
+  text-align: center;
+  color: white;
+  font-variant-caps: all-petite-caps;
+}
+
+div.threatplayer div.interactionValues {
+  grid-area: interaction;
+  
+  display: grid;
+  align-self: start;
+  justify-items: start;
+  grid-template-columns: 1fr 100fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 3px;
+}
+
+div.threatplayer div.combatValues {
+  grid-area: combat;
+  
+  margin-top: 200px;
+  align-self: start;
+
+  display: grid;
+  justify-items: end;
+  align-content: end;
+  grid-template-columns: 100fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 3px;
+}
+
+div.threatplayer div.healthValues {
+  grid-area: health;
+  display: none;
+}
+
+div.threatplayer div.gmNotes {
+  display: none;
+}
+
+div.skillSet {
+  display: grid;
+}
+
+div.skillValue {
+  display: grid;
+  place-items: center;
+  
+  width: 50px;
+  height: 50px;
+  
+  border: solid;
+  border-color: black;
+  background-color: #ddca7e;
+
+  text-align: center;
+  -webkit-text-stroke: initial;
+}
+
+div.skillName {
+  display: grid;
+
+  color: white;
+  font-variant-caps: all-petite-caps;
+
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+div.creatureSize {
+  display: grid;
+  
+  grid-area: size;  
+  
+  grid-template-areas:
+    'sizeLabel grid';
+  
+  align-content: end;
+  align-self: end;
+  
+  margin-bottom: 20px;
+}
+
+div.sizeLabel {
+  display: grid;
+  place-items: center;
+  color: white;
+
+  padding: 0px 5px 0px 5px;
+
+  border: solid;
+  border-color: black;
+  background-color: #ddca7e;
+
+  text-align: center;
+  font-size: 80%;
+}
+
+div.sizeValue {
+  display: grid;
+  place-items: center;
+  
+  width: 50px;
+  height: 50px;
+  
+  border: solid;
+  border-color: black;
+  background-color: #ddca7e;
+  border-radius: 100px;
+
+  text-align: center;
+  -webkit-text-stroke: initial;
+}
+
+div.armorValue {
+  font-size: 50%;
+}
+
+div.threatgm {
+  grid-template-areas:
+    '. . title title title title title'
+    'interaction interaction interaction . combat combat combat'
+    'health health health health health health health'
+    'gmnotes gmnotes gmnotes gmnotes gmnotes gmnotes gmnotes';
+  
+/*   background-color: #a8a8a8; */
+  background-blend-mode: screen;
+  grid-template-rows: 1fr 1fr 1fr 20fr;
+}
+
+div.threatgm div.interactionValues {
+  grid-area: interaction;
+  
+  align-self: start;
+  display: grid;
+  justify-items: start;
+  grid-template-columns: 1fr 100fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 3px;
+}
+
+div.threatgm div.combatValues {
+  grid-area: combat;
+  
+  display: grid;
+  justify-items: end;
+  align-content: end;
+  grid-template-columns: 100fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 3px;
+}
+
+div.threatgm div.healthValues {
+  grid-area: health;
+
+  display: grid;
+  justify-items: start;
+  grid-template-columns: 1fr 100fr 1fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 3px;
+}
+
+div.threatgm div.creatureSize {
+  display: none;
+}
+
+div.threatgm div.gmNotes {
+  grid-area: gmnotes;
+  
+  font-family: initial;
+  font-size: initial;
+  -webkit-text-stroke-width: initial;
+  
+  padding: 10px;
+}
