@@ -1,6 +1,7 @@
-$('.threatName').click(function(e) {
+// Use event delegation to handle clicks on threat names (including dynamically added ones)
+$(document).on('click', '.threatName', function(e) {
     $(this).parent().toggleClass('threatgm threatplayer');
-  });
+});
   
 $(function(){
     let selectElem = document.getElementById("selector");
