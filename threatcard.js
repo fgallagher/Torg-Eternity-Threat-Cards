@@ -1,6 +1,13 @@
 // Use event delegation to handle clicks on threat names (including dynamically added ones)
 $(document).on('click', '.threatName', function(e) {
-    $(this).parent().toggleClass('threatgm threatplayer');
+    const $parent = $(this).parent();
+    
+    // Remove both classes first, then add the appropriate one
+    if ($parent.hasClass('threatplayer')) {
+        $parent.removeClass('threatplayer').addClass('threatgm');
+    } else {
+        $parent.removeClass('threatgm').addClass('threatplayer');
+    }
 });
   
 $(function(){
@@ -57,10 +64,33 @@ $(function(){
         if (matchingCard) {
             // Copy the content and styling from the matching card
             selectedThreatDiv.innerHTML = matchingCard.innerHTML;
-            selectedThreatDiv.style.cssText = matchingCard.style.cssText;
+            
+            // Instead of copying the style attribute, set background properties individually
+            // to avoid the problematic shorthand syntax
+            const computedStyle = window.getComputedStyle(matchingCard);
+            selectedThreatDiv.style.backgroundImage = computedStyle.backgroundImage;
+            selectedThreatDiv.style.backgroundRepeat = computedStyle.backgroundRepeat;
+            selectedThreatDiv.style.backgroundPosition = computedStyle.backgroundPosition;
+            selectedThreatDiv.style.backgroundSize = computedStyle.backgroundSize;
+            selectedThreatDiv.style.backgroundColor = computedStyle.backgroundColor;
+            
             selectedThreatDiv.className = matchingCard.className;
             selectedThreatDiv.id = 'selectedThreat'; // Preserve the selectedThreat id
-            selectedThreatDiv.style.display = 'block';
+            
+            // Ensure it starts as threatplayer (player view)
+            selectedThreatDiv.classList.remove('threatgm');
+            selectedThreatDiv.classList.add('threatplayer');
+            
+            // Remove any inline display style and let CSS handle visibility
+            selectedThreatDiv.style.removeProperty('display');
+            
+            // Force a layout recalculation to ensure grid template areas are applied correctly
+            selectedThreatDiv.offsetHeight; // Reading this property forces a reflow
+            
+            // Additionally, ensure the threat class is properly set
+            if (!selectedThreatDiv.classList.contains('threat')) {
+                selectedThreatDiv.classList.add('threat');
+            }
         }
     });
     

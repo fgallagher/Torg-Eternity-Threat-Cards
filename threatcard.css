@@ -27,17 +27,16 @@ div.threat {
 
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 100fr;
+}
 
-/*   background-color: #a8a8a8;
-  background: url('https://images.squarespace-cdn.com/content/v1/54dd2136e4b0886d9bf86b76/1526671197004-V9SILI8AIXZQXE1TRZSP/ke17ZwdGBToddI8pDm48kOFDoe2VELPYIKbu7g6KtYsUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdIHngr59X9-kA3XInwe8sRoyo6lJLLbWmm0shLZGSfVtyoKoLPT5G4LIOhn8QCtSZ8/Living-Land-Baruk-Kaah.jpg') no-repeat center top;  
-  background: url('https://memeworld.funnyjunk.com/pictures/Hear+that+rumbling+giants_2b5d69_7082071.jpg') no-repeat center top;
-  background: url('https://66.media.tumblr.com/tumblr_m6u0itENVo1qkkw9mo1_640.jpg') no-repeat center top;
+/* Hide selectedThreat by default, show when it has content */
+#selectedThreat {
+  display: none;
+}
 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
- */
+#selectedThreat.threatplayer,
+#selectedThreat.threatgm {
+  display: grid;
 }
 
 div.threatplayer {
@@ -196,8 +195,11 @@ div.threatgm div.interactionValues {
   grid-row-gap: 3px;
 }
 
-div.threatgm div.combatValues {
+div.threat.threatgm div.combatValues,
+#selectedThreat.threatgm div.combatValues {
   grid-area: combat;
+  
+  margin-top: 0px !important; /* Reset the margin from threatplayer with !important */
   
   display: grid;
   justify-items: end;
