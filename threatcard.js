@@ -44,8 +44,9 @@ $(function(){
         const selectedName = this.value;
         
         if (selectedName === "") {
-            // Hide the selected threat div if no selection
-            selectedThreatDiv.style.display = 'none';
+            // Hide the selected threat div by removing classes
+            selectedThreatDiv.className = "";
+            selectedThreatDiv.id = 'selectedThreat'; // Preserve the selectedThreat id
             return;
         }
         

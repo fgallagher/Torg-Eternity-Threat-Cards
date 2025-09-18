@@ -195,8 +195,7 @@ div.threatgm div.interactionValues {
   grid-row-gap: 3px;
 }
 
-div.threat.threatgm div.combatValues,
-#selectedThreat.threatgm div.combatValues {
+div.threat.threatgm div.combatValues {
   grid-area: combat;
   
   margin-top: 0px !important; /* Reset the margin from threatplayer with !important */
