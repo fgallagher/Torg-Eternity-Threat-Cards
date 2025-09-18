@@ -280,6 +280,114 @@ function exportCharactersToMarkUp() {
                 this.PowerListText;
     
             return tC;
+        },
+
+        get HTMLFormat() {
+            var htmlOutput = 
+                '<div characterName="' + this.CharacterName + '" class="threat threatplayer"\n' +
+                '   style="background: url(\'http://mjolnirgroup.com/fpeeingg.com/torg/' + this.CharacterName + '.png\') no-repeat left top #a8a8a8;\n' +
+                '          -webkit-background-size: cover;\n' +
+                '          -moz-background-size: cover;\n' +
+                '          -o-background-size: cover;\n' +
+                '          background-size: cover;"\n' +
+                '   id="threatCard" >\n' +
+                '<div class="threatName" id="threatName">' + this.CharacterName + '</div>\n\n' +
+                '    <div class="interactionValues">\n' +
+                '      <div class="skillValue">' + this.Defenses.Intimidate + '</div>\n' +
+                '      <div class="skillName">Intimidate</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Maneuver + '</div>\n' +
+                '      <div class="skillName">Maneuver</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Taunt + '</div>\n' +
+                '      <div class="skillName">Taunt</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Trick + '</div>\n' +
+                '      <div class="skillName">Trick</div>\n' +
+                '    </div>\n\n' +
+                '    <div class="combatValues">\n' +
+                '      <div class="skillName">Melee</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Melee + '</div>\n' +
+                '      <div class="skillName">Dodge</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Dodge + '</div>\n' +
+                '      <div class="skillName">Unarmed</div>\n' +
+                '      <div class="skillValue">' + this.Defenses.Unarmed + '</div>\n' +
+                '      <div class="skillName">Toughness</div>\n' +
+                '      <div class="skillValue">\n' +
+                '        <div>' + this.DerivedValues.Tough + ( this.DerivedValues.Armor > 0 ? ' (' + this.DerivedValues.Armor + ')' : '' ) + '</div>\n' +
+                '      </div>\n' +
+                '    </div>\n\n' +
+                '    <div class="healthValues">\n' +
+                '      <div class="skillValue">' + ( this.DerivedValues.Shock == 0 ? "-" : this.DerivedValues.Shock ) + '</div>\n' +
+                '      <div class="skillName">Shock</div>\n' +
+                '      <div class="skillName">Wounds</div>\n' +
+                '      <div class="skillValue">' + ( this.DerivedValues.Wounds == 0 ? "-" : this.DerivedValues.Wounds ) + '</div>\n' +
+                '    </div>\n' +
+                '     <div class="gmNotes" style="font-size: 49%">\n' +
+                '      <div><b>Attributes:</b> ';
+            
+            // Add attributes
+            var attrKeys = Object.keys(this.Attributes);
+            for (let i = 0; i < attrKeys.length; i++) {
+                htmlOutput += attrKeys[i] + ' ' + this.Attributes[attrKeys[i]] + (i < attrKeys.length - 1 ? ', ' : '');
+            }
+            htmlOutput += '</div>\n';
+            
+            // Add skills
+            htmlOutput += '      <div><b>Skills:</b> ';
+            var skillKeys = Object.keys(this.SkillList).sort();
+            for (let i = 0; i < skillKeys.length; i++) {
+                htmlOutput += skillKeys[i] + ' ' + this.SkillList[skillKeys[i]] + (i < skillKeys.length - 1 ? ', ' : '');
+            }
+            htmlOutput += '</div>\n';
+            
+            // Add move/tough/shock/wounds
+            htmlOutput += '      <div><b>Move:</b> ' + this.DerivedValues.Move + '; <b>Tough:</b> ' + this.DerivedValues.Tough + 
+                         '; <b>Shock:</b> ' + ( this.DerivedValues.Shock == 0 ? "-" : this.DerivedValues.Shock ) + 
+                         '; <b>Wounds:</b> ' + ( this.DerivedValues.Wounds == 0 ? "-" : this.DerivedValues.Wounds ) + '</div>\n';
+            
+            // Add equipment
+            htmlOutput += '      <div><b>Equipment:</b> <br/>\n';
+            for (const equip in this.Equipment) {
+                if (Object.hasOwnProperty.call(this.Equipment, equip)) {
+                    const description = this.Equipment[equip];
+                    htmlOutput += '        - ' + equip + ( description != "" ? ' (' + description + ')' : '' ) + '.<br/>\n';
+                }
+            }
+            htmlOutput += '      </div>\n';
+            
+            // Add possibilities
+            htmlOutput += '      <div><b>Possibilities:</b> ' + ( this.Possibilities > 0 ? this.Possibilities : "Never" ) + '</div>\n';
+            
+            // Add perks if any
+            if (Object.keys(this.Perks).length > 0) {
+                htmlOutput += '      <div><b>Perks:</b><br/>\n';
+                for (const perkName in this.Perks) {
+                    if (Object.hasOwnProperty.call(this.Perks, perkName)) {
+                        const perkDescription = this.Perks[perkName];
+                        htmlOutput += '        - <b>' + perkName + '</b>';
+                        if (perkDescription && perkDescription.trim() !== '') {
+                            htmlOutput += ': ' + perkDescription;
+                        }
+                        htmlOutput += '<br/>\n';
+                    }
+                }
+                htmlOutput += '      </div>\n';
+            }
+            
+            // Add powers if any
+            if (Object.keys(this.Powers).length > 0) {
+                htmlOutput += '      <div><b>Powers:</b> ';
+                var powerEntries = [];
+                for (const power in this.Powers) {
+                    if (Object.hasOwnProperty.call(this.Powers, power)) {
+                        const skill = this.Powers[power];
+                        powerEntries.push(power + ( skill != "" ? ' (' + skill + ')' : '' ));
+                    }
+                }
+                htmlOutput += powerEntries.join(', ') + '</div>\n';
+            }
+            
+            htmlOutput += '    </div>\n\n    </div>';
+            
+            return htmlOutput;
         }
     };
 
@@ -318,7 +426,19 @@ function exportCharactersToMarkUp() {
                                     muSheet.style.cssText = "-moz-user-select: all; -webkit-user-select: all; -ms-user-select: all;";
                                     muSheet.innerHTML = Character.MarkUp;
 
+                                    var htmlFormatElement = document.createElement("pre");
+                                    htmlFormatElement.className = "muHTML";
+                                    htmlFormatElement.style.cssText = "-moz-user-select: all; -webkit-user-select: all; -ms-user-select: all;";
+                                    // Escape HTML for display as text but preserve the comment
+                                    var escapedHTML = Character.HTMLFormat
+                                        .replace(/&/g, '&amp;')
+                                        .replace(/</g, '&lt;')
+                                        .replace(/>/g, '&gt;')
+                                        .replace(/"/g, '&quot;');
+                                    htmlFormatElement.innerHTML = escapedHTML;
+
                                     bioElement.appendChild(muSheet);
+                                    bioElement.appendChild(htmlFormatElement);
                                     console.log('Added threat card and markup to bio');
                                 } else {
                                     console.error('Could not find bio element');
@@ -335,6 +455,37 @@ function exportCharactersToMarkUp() {
                             var muSheet = sheet.querySelector('pre.muSheet');
                             if (muSheet) {
                                 muSheet.innerHTML = Character.MarkUp;
+                            }
+
+                            var htmlFormatElement = sheet.querySelector('pre.muHTML');
+                            if (htmlFormatElement) {
+                                // Escape HTML for display as text but preserve the comment
+                                var escapedHTML = Character.HTMLFormat
+                                    .replace(/&/g, '&amp;')
+                                    .replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/"/g, '&quot;');
+                                htmlFormatElement.innerHTML = escapedHTML;
+                            } else {
+                                // Create HTML format element if it doesn't exist
+                                var newHtmlFormatElement = document.createElement("pre");
+                                newHtmlFormatElement.className = "muHTML";
+                                newHtmlFormatElement.style.cssText = "-moz-user-select: all; -webkit-user-select: all; -ms-user-select: all;";
+                                // Escape HTML for display as text but preserve the comment
+                                var escapedHTML = Character.HTMLFormat
+                                    .replace(/&/g, '&amp;')
+                                    .replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/"/g, '&quot;');
+                                newHtmlFormatElement.innerHTML = escapedHTML;
+                                
+                                var bioElement = sheet.querySelector('div#tab-content');
+                                if (bioElement) {
+                                    bioElement = bioElement.querySelector('div.content.note-editor.summernote.bio');
+                                    if (bioElement) {
+                                        bioElement.appendChild(newHtmlFormatElement);
+                                    }
+                                }
                             }
                             console.log('Updated existing threat card and markup');
                         }
