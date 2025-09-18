@@ -20,7 +20,6 @@ try {
             spans[0].parentElement.innerHTML = '<span class="pictos">R</span>';
         }
         newNewButton.onclick = function() {exportCharactersToMarkUp();};
-        newNewButton.style.backgroundColor = '#4CAF50'; // Green to indicate it's ready
         newNewButton.title = 'Click to export character to markup format';
         diceButton.insertAdjacentElement('afterend', newNewButton);
         console.log('Export button created and inserted');
@@ -417,7 +416,6 @@ setTimeout(function() {
                 spans[0].parentElement.innerHTML = '<span class="pictos">R</span>';
             }
             newNewButton.onclick = function() {exportCharactersToMarkUp();};
-            newNewButton.style.backgroundColor = '#4CAF50';
             newNewButton.title = 'Click to export character to markup format';
             diceButton.insertAdjacentElement('afterend', newNewButton);
             console.log('Export button created and inserted');
