@@ -351,48 +351,7 @@ function exportCharactersToMarkUp() {
     }
 }
 
-// More aggressive waiting strategy - but stop after a few tries
-var retryCount = 0;
-function waitForCharacterSheet() {
-    console.log('Checking for character sheet...', 'retry:', retryCount);
-    
-    if (retryCount > 5) {
-        console.log('Stopped looking for character sheet after 5 retries');
-        return;
-    }
-    
-    const iframes = document.getElementsByTagName("iframe");
-    
-    for (let i = 0; i < iframes.length; i++) {
-        try {
-            const frame = iframes[i];
-            if (frame.contentDocument != null) {
-                const sheet = frame.contentDocument;
-                
-                // Check if this looks like a character sheet iframe
-                if (frame.attributes && frame.attributes.title && 
-                    frame.attributes.title.textContent.startsWith("Character sheet")) {
-                    
-                    // Check if the character sheet has the elements we need
-                    const nameField = sheet.getElementsByName("attr_Name")[0];
-                    if (nameField && nameField.value) {
-                        console.log('Found character sheet with name:', nameField.value);
-                        exportCharactersToMarkUp();
-                        return; // Stop checking once we find and process a sheet
-                    } else {
-                        console.log('Found character sheet iframe but no character name yet...');
-                    }
-                }
-            }
-        } catch(e) {
-            // Cross-origin or other error, ignore
-        }
-    }
-    
-    retryCount++;
-    console.log('No ready character sheet found, retrying in 3 seconds...');
-    setTimeout(waitForCharacterSheet, 3000);
-}
+// Button creation only - no automatic processing since character sheets aren't available on load
 
 // Create button immediately, regardless of auto-run success
 setTimeout(function() {
@@ -426,6 +385,3 @@ setTimeout(function() {
         console.error('Error creating button:', e);
     }
 }, 2000);
-
-// Start checking immediately and then with delays
-waitForCharacterSheet();
