@@ -283,6 +283,33 @@ function exportCharactersToMarkUp() {
         },
 
         get HTMLFormat() {
+            // Calculate size modifier based on perks
+            var sizeModifier = 0;
+            var sizeModifierText = '';
+            var sizePerkName = '';
+            
+            if (this.Perks['Tiny']) {
+                sizeModifier = -6;
+                sizeModifierText = '-6';
+                sizePerkName = 'Tiny';
+            } else if (this.Perks['Very Small']) {
+                sizeModifier = -4;
+                sizeModifierText = '-4';
+                sizePerkName = 'Very Small';
+            } else if (this.Perks['Small']) {
+                sizeModifier = -2;
+                sizeModifierText = '-2';
+                sizePerkName = 'Small';
+            } else if (this.Perks['Large']) {
+                sizeModifier = 2;
+                sizeModifierText = '+2';
+                sizePerkName = 'Large';
+            } else if (this.Perks['Very Large']) {
+                sizeModifier = 4;
+                sizeModifierText = '+4';
+                sizePerkName = 'Very Large';
+            }
+            
             var htmlOutput = 
                 '<div characterName="' + this.CharacterName + '" class="threat threatplayer"\n' +
                 '   style="background: url(\'http://mjolnirgroup.com/fpeeingg.com/torg/' + this.CharacterName + '.png\') no-repeat left top #a8a8a8;\n' +
@@ -314,6 +341,13 @@ function exportCharactersToMarkUp() {
                 '        <div>' + this.DerivedValues.Tough + ( this.DerivedValues.Armor > 0 ? ' (' + this.DerivedValues.Armor + ')' : '' ) + '</div>\n' +
                 '      </div>\n' +
                 '    </div>\n\n' +
+                
+                // Add creature size section if there's a size modifier
+                (sizeModifier !== 0 ? 
+                '    <div class="creatureSize">\n' +
+                '      <div class="sizeLabel">' + sizePerkName + '</div>\n' +
+                '      <div class="sizeValue">' + sizeModifierText + '</div>\n' +
+                '    </div>\n\n' : '') +
                 '    <div class="healthValues">\n' +
                 '      <div class="skillValue">' + ( this.DerivedValues.Shock == 0 ? "-" : this.DerivedValues.Shock ) + '</div>\n' +
                 '      <div class="skillName">Shock</div>\n' +
