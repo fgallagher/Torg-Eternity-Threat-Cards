@@ -338,7 +338,8 @@ function exportCharactersToMarkUp() {
                 '      <div class="skillValue">' + this.Defenses.Unarmed + '</div>\n' +
                 '      <div class="skillName">Toughness</div>\n' +
                 '      <div class="skillValue">\n' +
-                '        <div>' + this.DerivedValues.Tough + ( this.DerivedValues.Armor > 0 ? ' (' + this.DerivedValues.Armor + ')' : '' ) + '</div>\n' +
+                '        <div>' + this.DerivedValues.Tough + '</div>\n' +
+                '        <div class="armorValue">(' + this.DerivedValues.Armor + ')</div>\n' +
                 '      </div>\n' +
                 '    </div>\n\n' +
                 
