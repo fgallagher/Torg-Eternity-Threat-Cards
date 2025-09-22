@@ -1,6 +1,40 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Squada+One|Prompt|Archivo+Black">
 <link rel="stylesheet" href="threatcard.css">
 
+<!-- Session Management Controls -->
+<div id="sessionControls" class="session-controls">
+  <h2>Session Management</h2>
+  
+  <div class="session-section">
+    <h3>Current Session</h3>
+    <div id="currentSession">
+      <span id="sessionStatus">No active session</span>
+      <div id="sessionActions" style="display: none;">
+        <span id="sessionName"></span>
+        <button id="copySessionLink">Copy Link</button>
+        <button id="endSession">End Session</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="session-section">
+    <h3>Create New Session</h3>
+    <input type="text" id="sessionNameInput" placeholder="Session Name (optional)" />
+    <button id="createSession">Create Session</button>
+  </div>
+  
+  <div class="session-section" id="sessionThreats" style="display: none;">
+    <h3>Session Threats</h3>
+    <div id="sessionThreatList">
+      <!-- Session-specific threats will appear here -->
+    </div>
+    <div class="add-threat-controls">
+      <select id="availableThreats"></select>
+      <button id="addThreatToSession">Add to Session</button>
+    </div>
+  </div>
+</div>
+
 <div class"selector">
   <select id="selector"></select>
 </div>

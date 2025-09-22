@@ -7,6 +7,100 @@ body {
   font-size: 150%;
 }
 
+/* Session Management Styles */
+.session-controls {
+  background: #f5f5f5;
+  border: 2px solid #333;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.session-controls h2, .session-controls h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  -webkit-text-stroke: initial;
+  font-size: 1.2em;
+}
+
+.session-controls h2 {
+  font-size: 1.5em;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+.session-section {
+  margin: 15px 0;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.session-controls input, .session-controls select, .session-controls button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.session-controls button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.session-controls button:hover {
+  background: #45a049;
+}
+
+.session-controls button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+#sessionThreatList {
+  margin: 10px 0;
+  min-height: 100px;
+  border: 1px solid #eee;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.session-threat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 3px 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.session-threat-item button {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.add-threat-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-threat-controls select {
+  flex: 1;
+}
+
 div.threatPage {
   display: grid;
   grid-row-gap: 10px;
